@@ -7,18 +7,12 @@ build_status_module() {
   local text="$4"
 
   if [ "$status_fill" = "icon" ]; then
-    local bg
-    local show_icon="#[fg=$color,bg=$thm_bg,nobold,nounderscore,noitalics]$icon "
+    local bg="$thm_bg"
+    local show_icon="#[fg=$color,bg=$thm_bg,nobold,nounderscore,noitalics]$icon"
     local show_text="#[fg=$color,bg=$thm_bg] $text"
 
-    if [ "$status_connect_separator" = "yes" ]; then
-      bg="$thm_gray"
-    else
-      bg="default"
-    fi
-
-    local show_left_separator="#[fg=$bg,bg=$bg,nobold,nounderscore,noitalics]$status_left_separator"
-    local show_right_separator="#[fg=$thm_bg,bg=$bg,nobold,nounderscore,noitalics]$status_right_separator"
+    local show_left_separator="#[fg=$thm_bg,bg=$thm_bg,nobold,nounderscore,noitalics] "
+    local show_right_separator="#[fg=$thm_bg,bg=$thm_bg,nobold,nounderscore,noitalics] "
   fi
 
   if [ "$status_fill" = "all" ]; then
@@ -26,18 +20,18 @@ build_status_module() {
     local show_text="#[fg=$thm_bg,bg=$color]$text"
 
     if [ "$status_connect_separator" = "yes" ]; then
-      local show_left_separator="#[fg=$color,nobold,nounderscore,noitalics]$status_left_separator"
-      local show_right_separator="#[fg=$color,bg=$color,nobold,nounderscore,noitalics]$status_right_separator"
+      local show_left_separator="#[fg=$color,nobold,nounderscore,noitalics]"
+      local show_right_separator="#[fg=$color,bg=default,nobold,nounderscore,noitalics]"
 
     else
-      local show_left_separator="#[fg=$color,bg=default,nobold,nounderscore,noitalics]$status_left_separator"
-      local show_right_separator="#[fg=$color,bg=default,nobold,nounderscore,noitalics]$status_right_separator"
+      local show_left_separator="#[fg=$color,bg=default,nobold,nounderscore,noitalics]"
+      local show_right_separator="#[fg=$color,bg=default,nobold,nounderscore,noitalics]"
     fi
 
   fi
 
   if [ $((index)) -eq 0 ]; then
-    local show_left_separator="#[fg=$bg,bg=default,nobold,nounderscore,noitalics]$status_left_separator"
+    local show_left_separator="#[fg=$bg,bg=$thm_bg,nobold,nounderscore,noitalics]"
   fi
 
   echo "$show_left_separator$show_icon$show_text$show_right_separator"
